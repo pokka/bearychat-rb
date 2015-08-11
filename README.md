@@ -42,7 +42,7 @@ require 'bearychat/capistrano'
 set :bearychat_hook, your_bearychat_hook_uri
 ```
 
-# options
+#### options
 ```
 #default: true
 set :bearychat_enabled
