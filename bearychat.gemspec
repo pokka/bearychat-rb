@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Simple ruby library to interact with Bearychat}
   spec.description   = %q{Simple ruby library to interact with Bearychat}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/pokka/bearychat-rb"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
