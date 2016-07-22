@@ -1,9 +1,13 @@
 require "bearychat/version"
-require "bearychat/incoming"
-
 
 module Bearychat
   def self.incoming(hook)
+    require 'bearychat/incoming'
     Incoming.new(hook)
+  end
+
+  def self.rtm(token)
+    require 'bearychat/rtm'
+    RTM.new(token)
   end
 end

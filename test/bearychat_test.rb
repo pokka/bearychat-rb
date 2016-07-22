@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'bearychat/rtm'
 
 class BearychatTest < Minitest::Test
   MOCK_HOOK_URI = 'https://hook.bearychat.com/mock/incoming/hook'
@@ -12,8 +13,15 @@ class BearychatTest < Minitest::Test
   end
 
   def test_incoming_send
-    incoming_stub = stub_request(:post, MOCK_HOOK_URI).with(body: hash_including(:payload))
+    incoming_stub = stub_request(:post, MOCK_HOOK_URI).with(body: hash_including(:text))
     ::Bearychat.incoming(MOCK_HOOK_URI).send
     assert_requested(incoming_stub)
+  end
+
+  def test_rtm_send
+    rtm_stub = stub_request(:post, Bearychat::RTM::MESSAGE_URL).with(body: hash_including(:token))
+    token = 'TOKEN'
+    ::Bearychat.rtm(token).send text: 'test'
+    assert_requested(rtm_stub)
   end
 end

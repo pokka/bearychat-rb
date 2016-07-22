@@ -20,9 +20,17 @@ Or install it yourself as:
 
 ## Usage
 
-### Common
+### Incoming
 
 Check bearychat [incoming API](https://github.com/bearyinnovative/bearychat-tutorial/blob/master/robots/incoming.md)
+
+```
+require 'bearychat'
+incoming = Bearychat.incoming('hook_uri')
+incoming.send { text: '...', ... }
+```
+
+or
 
 ```
 require 'bearychat'
@@ -68,4 +76,3 @@ set :bearychat_starting_color
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

@@ -1,21 +1,21 @@
-require 'httparty'
 require 'ostruct'
+require 'bearychat/http_client'
+require 'json'
 
 module Bearychat
   class Incoming < OpenStruct
-    include HTTParty
 
     DEFAULT_PARAMS = {
       text: "text, this field may accept markdown",
-      markdown: false,
+      markdown: true,
       channel: "",
       attachments: []
     }
 
-    attr_reader :hook
+    attr_reader :http_client
 
     def initialize(hook, info={})
-      @hook = hook
+      @http_client = HttpClient.new(hook)
       super(DEFAULT_PARAMS.merge(info))
     end
 
@@ -24,12 +24,14 @@ module Bearychat
       self
     end
 
-    def send
+    def send(body = {})
       if block_given?
         yield self
         send()
+      elsif !body.empty?
+        http_client.post_json(body.to_json)
       else
-        self.class.post(hook, body: { payload: as_json })
+        http_client.post_json(as_json)
       end
     end
 
